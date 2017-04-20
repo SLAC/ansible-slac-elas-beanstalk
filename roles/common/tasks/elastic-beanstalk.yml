@@ -1,0 +1,33 @@
+---
+
+- name: Create Elastic Beanstalk application
+  elasticbeanstalk_app:
+    region: "{{ slac_region }}"
+    app_name: "{{ eb_app_name }}"
+    state: present
+  register: app
+
+
+- name: Create application version
+  elasticbeanstalk_version:
+    region: "{{ slac_region }}"
+    app_name: "{{ eb_app_name }}"
+    version_label: Sample Version
+    s3_bucket: "{{ current_bucket }}"
+    s3_key: "{{ current_file_name }}"
+    state: present
+  register: version
+
+
+- name: Create appo
+  elasticbeanstalk_env:
+    region: "{{ slac_region }}"
+    app_name: "{{ eb_app_name }}"
+    env_name: "{{ eb_app_name }}.env"
+    version_label: "{{ current_version_label }}"
+    solution_stack_name: "{{ current_stack_name }}"
+    option_settings:
+        Namespace: aws:elasticbeanstalk:application:environment
+        OptionName: "{{ option.name }}"
+        Value: "{{ option.value }}"
+  register: env

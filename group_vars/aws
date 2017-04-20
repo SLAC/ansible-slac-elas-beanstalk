@@ -1,0 +1,8 @@
+slac_region: "us-west-2"
+eb_app_name: "ESHFieldLog" # Must be the same name as the package folder in the Visual Studio solution
+current_bucket: "esh-bucket"
+current_file_name: "esh-log.zip"
+current_stack_name: ""
+current_version_label: "ESH Walking Log"
+current_stack_name: "64bit Windows Server 2012 R2 v1.2.0 running IIS 8.5"
+
